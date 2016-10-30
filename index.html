@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+
+        <title>REST/</title>
+
+        <meta name="description" content="Presentation about REST architechture">
+        <meta name="author" content="Denis V. Kirpichenkov">
+
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+        <link rel="stylesheet" href="css/reveal.css">
+        <link rel="stylesheet" href="css/theme/white.css" id="theme">
+
+        <link rel="stylesheet" href="css/hljs/vs.css" id="highlight-theme">
+
+        <!-- Printing and PDF exports -->
+        <script>
+            var link = document.createElement( 'link' );
+            link.rel = 'stylesheet';
+            link.type = 'text/css';
+            link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+            document.getElementsByTagName( 'head' )[0].appendChild( link );
+        </script>
+
+        <!--[if lt IE 9]>
+        <script src="lib/js/html5shiv.js"></script>
+        <![endif]-->
+
+        <style>
+.reveal .slide-number {
+    font-size:22pt;
+    color:black;
+}
+
+.reveal pre {
+    background: none;
+    border: none;
+    box-shadow: none;    
+}
+
+.reveal pre code{
+    color: black;
+    background: none;
+    box-shadow: none;
+    max-height: none;
+}
+
+.reveal section img {
+    border: none;
+    box-shadow: none;
+}
+
+.reveal pre code {
+    overflow: hidden;
+}
+
+.reveal .footer {
+	font-size:22pt;
+	color:black;
+
+	position: absolute; 
+	left: 35%;  
+	bottom: 0.5em;
+}
+        </style>
+    </head>
+
+    <body>
+
+        <div class="reveal">
+
+			<div class="footer">
+				NAUMEN, Кирпиченков Денис Викторович
+			</div>
+
+
+            <!-- Any section element inside of this container is displayed as a slide -->
+            <div class="slides">
+                <section>
+                    <h1>RESTful Web</h1>
+                    <p>
+                        <small>
+                        <a href="https://github.com/d0k1">Кирпиченков Денис</a> / <a href="mailto:dkirpichenkov@naumen.ru">dkirpichenkov@naumen.ru</a>
+                        <br/>
+                        <br/>
+                        <a href="https://d0k1.github.io/GetRest/">d0k1.github.io/GetRest/</a>
+                        </small>
+                    </p>
+                </section>
+
+                <section>
+                    <h1>План</h1>
+                    <p>
+                        <ul>
+                            <li>Распределенные приложения</li>
+                            <li>REST</li>
+                            <li>Java REST сервер</li>
+                            <li>Postman REST клиент</li>
+                            <li>Практика</li>
+                        </ul>
+                    </p>
+                </section>
+
+                <section>
+                    <h1>Большое приложение</h1>
+                    <img src="img/microservices.png" style="width: 50%">
+                </section>
+                
+                <section>
+                    <h1>Мобильное приложение</h1>
+                    <img src="img/vk_api.png"/>
+                </section>
+                
+                <section>
+                    <h1>Web-приложение</h1>
+                    <p>
+                    </p>
+                </section>
+                
+                <section>
+                    <h1>REpresentational State Transfer</h1>                    
+                    <ul>
+                    	<li>Простота</li>
+                    	<li>Масштабируемость</li>
+                    	<li>Гибкость</li>
+                    	<li>Переносимость</li>
+                    	<li>Надежность</li>
+                    </ul>
+                </section>
+                
+                <section>
+                    <h1>Архитектура REST</h1>
+                    <ul>
+                    	<li>Клиент-Сервер</li>
+                    	<li>Нет состояния</li>
+                    	<li>Кеширование</li>
+                    	<li>Единообразный интерфейс</li>
+                    	<li>Слои</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h1>HTTP REST</h1>
+                    <ul>
+                    	<li>GET http://www.example.com/customers/123</li>
+                    	<li>PUT http://www.example.com/customers/12345</li>
+                    	<li>POST http://www.example.com/customers</li>
+                    	<li>DELETE http://www.example.com/customers/12345</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h1>HTTP REST</h1>
+                    <table>
+                    	<thead>
+                    		<th>Метод</th>
+                    		<th>/customers</th>
+                    		<th>/customer/{id}</th>
+                    	</thead>
+                    	<tbody>
+                    		<tr>
+                    			<td>
+                    				GET
+                    			</td>
+                    			<td>
+                    				Список клиентов
+                    			</td>
+                    			<td>
+                    				Клиента по id
+                    			</td>
+                    		</tr>
+                    		<tr>
+                    			<td>
+                    				PUT
+                    			</td>
+                    			<td>
+                    				404
+                    			</td>
+                    			<td>
+                    				Изменение клиента по id
+                    			</td>
+                    		</tr>
+                    		<tr>
+                    			<td>
+                    				POST
+                    			</td>
+                    			<td>
+                    				Новый клиент
+                    			</td>
+                    			<td>
+                    				404
+                    			</td>
+                    		</tr>
+                    		<tr>
+                    			<td>
+                    				DELETE
+                    			</td>
+                    			<td>
+                    				404
+                    			</td>
+                    			<td>
+                    				Удаление клиента по id
+                    			</td>
+                    		</tr>
+                    	</tbody>
+                    </table>
+                </section>
+
+                <section>
+                    <h1>Java REST сервер</h1>
+                </section>
+
+                <section>
+                    <h1>Postman REST клиент</h1>
+                </section>
+
+                <section>
+                    <h1>Практическая часть</h1>
+                </section>
+
+<!--
+                <section>
+                    <h1>Слайд с кодом</h1>
+<pre style="width:auto;"><code data-trim class="java">package com.transaction.test.dao;
+
+public interface AccountDAO {
+}</code></pre>
+<pre style="width:auto;"><code data-trim class="java">package com.transaction.test.dao;
+public interface TransactionDAO {
+    // Проведение перевода
+    void saveTransaction(long accountId1, long accountId2, long amount);
+}</code></pre>
+                </section>
+-->
+            </div>
+        </div>
+
+        <script src="lib/js/head.min.js"></script>
+        <script src="js/reveal.js"></script>
+
+        <script>
+
+            // Full list of configuration options available at:
+            // https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+                controls: false,
+                progress: true,
+                history: true,
+                center: true,
+                slideNumber: true,
+
+                transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+                // Optional reveal.js plugins
+                dependencies: [
+                    { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                    { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+                    { src: 'plugin/zoom-js/zoom.js', async: true },
+                    { src: 'plugin/notes/notes.js', async: true }
+                ]
+            });
+
+        </script>
+
+    </body>
+</html>
