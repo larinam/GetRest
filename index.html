@@ -140,8 +140,8 @@
                     	<li>Клиент-Сервер</li>
                     	<li>Нет состояния</li>
                     	<li>Кеширование</li>
-                    	<li>Единообразный интерфейс</li>
                     	<li>Слои</li>
+                        <li>Единообразный интерфейс</li>
                     </ul>
                 </section>
 
@@ -214,15 +214,122 @@
 
                 <section>
                     <h1>Java REST сервер</h1>
+                    <ul>
+                        <li>Модель и хранилище данных</li>
+                        <li>Класс обработчик rest-запросов</li>
+                        <li>Класс обработчик "запросов браузера"</li>
+                    </ul>
                 </section>
 
                 <section>
-                    <h1>Postman REST клиент</h1>
+                    <h1>Модель данных </h1>
+<pre style="width:auto;"><code data-trim class="java">
+/**
+* простое представление замера температуры в определенную дату
+*/
+public class WeatherData
+{
+    // идентификатор сущности
+    private int id;
+
+    // строковое представление даты, пример '31-10-2016'
+    private String date;
+
+    // целочисленное представление температуры, пример -5
+    private int temperature;
+}
+</code></pre>
+                </section>
+                <section>
+                    <h1>Обработка REST запросов</h1>
+<pre style="width:auto;"><code data-trim class="java">
+/**
+ * Простой пример REST контрлллера, который будет обрабатывать запросы
+ *
+ * Важно
+ * @RestController автоматическое преобразование данных из/в JSON
+ * @PathVariable - получение данных из url
+ * @RequestBody - получение объекта из тела запроса
+ * @RequestMapping - указание URL и HTTP метода для обработки
+ */
+@RestController
+public class WeatherController
+{
+
+}
+</code></pre>
+                </section>
+                <section>
+                    <h1>GET запрос</h1>
+<pre style="width:auto;"><code data-trim class="java">
+@RestController
+public class WeatherController
+{
+    @RequestMapping(value = "/weatherdata", method = RequestMethod.GET)
+    public List&#60;WeatherData&#62; getWeather()
+    {
+        return Arrays.asList(new WeatherData("30-10-2016", -1), 
+                            new WeatherData("31-10-2016", -3));
+    }
+}
+</code></pre>
+</section>            
+                <section>
+                    <h1>GET ответ</h1>
+                    <img src="img/get_rest.png"/>
+                </section>
+                <section>
+                    <h1>PUT запрос</h1>
+<pre style="width:auto;"><code data-trim class="java">
+@RestController
+public class WeatherController
+{
+    @RequestMapping(value = "/weatherdata/{id}", method = RequestMethod.PUT)
+    public WeatherData putWeather(@PathVariable int id
+                                  HttpServletRequest request, 
+                                  HttpServletResponse response)
+    {
+        return new WeatherData("-1", id);
+    }
+}
+</code></pre>
+                </section>
+
+                <section>
+                    <h1>Postman</h1>
+                    <img src="img/postman.png"/>
+                </section>
+
+                <section>
+                    <h1>JSP пример</h1>
+<pre style="width:auto;"><code data-trim class="jsp">
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page import="ru.naumen.model.WeatherData" %>
+<%@ page import="java.util.ArrayList" %>
+<%
+    ArrayList&#60;String&#62; weather = new ArrayList&#60;&#62;();
+    weather.add("String 1");
+    weather.add("String 2");
+%>
+<%
+ for(String item:weather) {
+     out.print(item);
+ }
+%>
+</code></pre>
                 </section>
 
                 <section>
                     <h1>Практическая часть</h1>
+                    <ul>
+                        <li>Java web-приложение</li>
+                        <li>Индикация погоды: номер - дата - температура</li>
+                        <li>GET, POST, PUT, DELETE операции</li>
+                        <li>JSP для отображения всех погодных данных</li>
+                    </ul>
+                    <p>https://github.com/d0k1/GetRest.git,<br/>ветка Master</p>
                 </section>
+
 
 <!--
                 <section>
