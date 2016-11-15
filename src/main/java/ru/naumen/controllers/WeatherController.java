@@ -4,7 +4,6 @@ import javax.inject.Inject;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.naumen.model.HashMapStorage;
 import ru.naumen.model.WeatherData;
 
 import java.util.List;
