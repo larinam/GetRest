@@ -1,8 +1,7 @@
 # GetRest
 Talk about REST architecture and Java Interop
 # Slides
-https://d0k1.github.io/GetRest/#/
-
+https://docs.google.com/presentation/d/18S545yh1Rqo3BIZjMnXHaVdmDSEw3paur-ETXW761e4/edit?usp=sharing
 # Начало работы
 
 Для начала работы требуется:
